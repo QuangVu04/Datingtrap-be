@@ -4,6 +4,7 @@ package com.example.datingtrap.controller;
 import com.example.datingtrap.dto.ApiResponse;
 import com.example.datingtrap.dto.CreateMatchRequest;
 import com.example.datingtrap.dto.ListMatchConvo;
+import com.example.datingtrap.dto.Paging;
 import com.example.datingtrap.entity.Matches;
 import com.example.datingtrap.service.Matchservice.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class MatchController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ListMatchConvo>> getMatches(
+    public ResponseEntity<Paging<ListMatchConvo>>  getMatches(
             @RequestParam Long userId,
-            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "20") int size
     ) {
         return matchService.getMatches(userId, page, size);

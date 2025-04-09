@@ -3,12 +3,14 @@ package com.example.datingtrap.service.Matchservice.MatchServiceImpl;
 import com.example.datingtrap.dto.ApiResponse;
 import com.example.datingtrap.dto.CreateMatchRequest;
 import com.example.datingtrap.dto.ListMatchConvo;
+import com.example.datingtrap.dto.Paging;
 import com.example.datingtrap.entity.Matches;
 import com.example.datingtrap.entity.User;
 import com.example.datingtrap.repository.MatchRepository;
 import com.example.datingtrap.repository.UserRepository;
 import com.example.datingtrap.service.Matchservice.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +38,22 @@ public class MatchServiceImpl implements MatchService {
         ApiResponse response = new ApiResponse("Match created successfully", "SUCCESS");
         return ResponseEntity.ok(response);
     }
-    public ResponseEntity<List<ListMatchConvo>> getMatches(Long userId, int page, int size) {
-        int offset = (page - 1) * size;
+    public ResponseEntity<Paging<ListMatchConvo>> getMatches(Long userId, int page, int size) {
+        int offset = page  * size;
+
         List<ListMatchConvo> matches = matchRepository.findMatchesByUserPaged(userId, size, offset);
-        return ResponseEntity.ok(matches);
+
+        long totalElements = matchRepository.countMatchesByUser(userId);
+        int totalPages = (int) Math.ceil((double) totalElements / size);
+
+        Paging<ListMatchConvo> paging = new Paging<>(
+                matches,
+                page,
+                totalPages,
+                totalElements
+        );
+
+        return ResponseEntity.ok(paging);
     }
 
 
