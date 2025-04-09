@@ -11,7 +11,9 @@ public class MessageDTO {
     private Long receiverId;
     private LocalDateTime createdAt;
 
-    // constructor
+    public MessageDTO() {
+    }
+
     public MessageDTO(Message message) {
         this.id = message.getId();
         this.message = message.getMessage();

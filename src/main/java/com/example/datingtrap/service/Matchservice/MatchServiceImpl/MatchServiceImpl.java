@@ -1,16 +1,12 @@
 package com.example.datingtrap.service.Matchservice.MatchServiceImpl;
 
-import com.example.datingtrap.dto.ApiResponse;
-import com.example.datingtrap.dto.CreateMatchRequest;
-import com.example.datingtrap.dto.ListMatchConvo;
-import com.example.datingtrap.dto.Paging;
+import com.example.datingtrap.dto.*;
 import com.example.datingtrap.entity.Matches;
 import com.example.datingtrap.entity.User;
 import com.example.datingtrap.repository.MatchRepository;
 import com.example.datingtrap.repository.UserRepository;
 import com.example.datingtrap.service.Matchservice.MatchService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
