@@ -12,16 +12,16 @@ CREATE TABLE IF NOT EXISTS public.hobby (
 
 -- Bảng users
 CREATE TABLE IF NOT EXISTS public.users (
-  id int4 NOT NULL,
+  id SERIAL PRIMARY KEY,
   username varchar NOT NULL,
   email varchar NOT NULL,
   "fireBaseId" uuid NOT NULL,
   created_at timestamp NULL,
   CONSTRAINT users_email_key UNIQUE (email),
   CONSTRAINT "users_fireBaseId_key" UNIQUE ("fireBaseId"),
-  CONSTRAINT users_pkey PRIMARY KEY (id),
   CONSTRAINT users_username_key UNIQUE (username)
 );
+
 
 -- Bảng matches
 CREATE TABLE IF NOT EXISTS public.matches (
