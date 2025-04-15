@@ -13,6 +13,7 @@ import lombok.*;
 public class Hobby {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "name")

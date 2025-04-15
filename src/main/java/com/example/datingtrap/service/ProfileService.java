@@ -2,6 +2,7 @@ package com.example.datingtrap.service;
 
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 import com.example.datingtrap.dto.*;
@@ -71,6 +72,20 @@ public class ProfileService {
 //            userHobby.setHobby(hobby);
 //            userHobbyRepository.save(userHobby);
 //        }
+        List<String> hobbyNames = dto.getHobbies(); // danh sách tên hobby từ DTO
+        Set<Hobby> newHobbies = new HashSet<>();
+
+        for (String name : hobbyNames) {
+            Hobby hobby = hobbyRepository.findByName(name)
+                    .orElseGet(() -> {
+                        Hobby newHobby = new Hobby();
+                        newHobby.setName(name);
+                        return hobbyRepository.save(newHobby);
+                    });
+            newHobbies.add(hobby);
+        }
+
+        user.setHobbies(newHobbies);
 
         profileRepository.save(profile);
         return new ProfileDTO(profile);

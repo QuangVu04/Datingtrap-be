@@ -3,11 +3,12 @@
 
 -- Chỉ tạo bảng và dữ liệu
 
+-- Bật extension pgcrypto để dùng gen_random_uuid()
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- Bảng hobby
 CREATE TABLE IF NOT EXISTS public.hobby (
-  id int4 NOT NULL,
-  "name" varchar NULL,
-  CONSTRAINT hobby_pkey PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY,
+  "name" varchar UNIQUE NOT NULL
 );
 
 -- Bảng users
