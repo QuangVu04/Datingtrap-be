@@ -24,7 +24,7 @@ public class ProfileDTO {
     private String avatarUrl;
     private LocalDate birthDate;
 //    private Preference preference;
-//    private Set<Hobby> hobbies;
+    private Set<HobbyDTO> hobbies;
     private PreferenceDTO preference;
 
     public ProfileDTO (Profile profile) {
@@ -38,6 +38,9 @@ public class ProfileDTO {
         this.birthDate = profile.getBirthDate();
         this.bio = profile.getBio();
         this.preference = new PreferenceDTO(profile.getUser().getPreference());
-//        this.hobbies = profile.getUser().getHobby();
+        this.hobbies = profile.getUser().getHobbies()
+                .stream()
+                .map(HobbyDTO::new)
+                .collect(Collectors.toSet());
     }
 }

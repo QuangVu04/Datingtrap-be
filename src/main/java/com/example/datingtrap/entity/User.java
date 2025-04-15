@@ -42,11 +42,12 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Preference preference;
 
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user_hobby",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "hobby_id")
     )
-    @ElementCollection
     private Set<Hobby> hobbies;
+
 }
