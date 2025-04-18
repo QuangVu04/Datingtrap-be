@@ -13,4 +13,9 @@ public class GlobalExceptionHandler {
         ApiErrorResponse response = new ApiErrorResponse(ex.getMessage(), "ERROR");
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(ProfileNotFoundException.class)
+    public ResponseEntity<String> handleProfileNotFound(ProfileNotFoundException ex) {
+        return ResponseEntity.status(404).body(ex.getMessage());
+    }
 }

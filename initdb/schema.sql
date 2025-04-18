@@ -3,25 +3,26 @@
 
 -- Chỉ tạo bảng và dữ liệu
 
+-- Bật extension pgcrypto để dùng gen_random_uuid()
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
 -- Bảng hobby
 CREATE TABLE IF NOT EXISTS public.hobby (
-  id int4 NOT NULL,
-  "name" varchar NULL,
-  CONSTRAINT hobby_pkey PRIMARY KEY (id)
+  id SERIAL PRIMARY KEY,
+  "name" varchar UNIQUE NOT NULL
 );
 
 -- Bảng users
 CREATE TABLE IF NOT EXISTS public.users (
-  id int4 NOT NULL,
+  id SERIAL PRIMARY KEY,
   username varchar NOT NULL,
   email varchar NOT NULL,
   "fireBaseId" uuid ,
   created_at timestamp NULL,
   CONSTRAINT users_email_key UNIQUE (email),
   CONSTRAINT "users_fireBaseId_key" UNIQUE ("fireBaseId"),
-  CONSTRAINT users_pkey PRIMARY KEY (id),
   CONSTRAINT users_username_key UNIQUE (username)
 );
+
 
 -- Bảng matches
 CREATE TABLE IF NOT EXISTS public.matches (
