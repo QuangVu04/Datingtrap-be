@@ -23,6 +23,6 @@ public class ProfileUpdateDTO {
 
     private PreferenceDTO preference;
 //    private List<Long> hobbyIds;
-    private List<String> hobbies;
+    private Set<HobbyDTO> hobbies;
 
 }

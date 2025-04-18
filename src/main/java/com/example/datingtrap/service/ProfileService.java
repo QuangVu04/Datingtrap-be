@@ -72,14 +72,14 @@ public class ProfileService {
 //            userHobby.setHobby(hobby);
 //            userHobbyRepository.save(userHobby);
 //        }
-        List<String> hobbyNames = dto.getHobbies(); // danh sách tên hobby từ DTO
+        Set<HobbyDTO> hobbyDTOs = dto.getHobbies();
         Set<Hobby> newHobbies = new HashSet<>();
 
-        for (String name : hobbyNames) {
-            Hobby hobby = hobbyRepository.findByName(name)
+        for (HobbyDTO hobbyDto : hobbyDTOs) {
+            Hobby hobby = hobbyRepository.findById(hobbyDto.getId())
                     .orElseGet(() -> {
                         Hobby newHobby = new Hobby();
-                        newHobby.setName(name);
+                        newHobby.setName(hobbyDto.getName());
                         return hobbyRepository.save(newHobby);
                     });
             newHobbies.add(hobby);
@@ -126,7 +126,7 @@ public class ProfileService {
         preferenceRepository.save(preference);
 
         // Save hobbies
-        List<Long> hobbyIds = dto.getHobbyIds();
+        Set<Long> hobbyIds = dto.getHobbyIds();
         Set<Hobby> hobbies = hobbyIds.stream()
                 .map(id -> hobbyRepository.findById(id)
                         .orElseThrow(() -> new ResourceNotFoundException("Hobby not found: " + id)))

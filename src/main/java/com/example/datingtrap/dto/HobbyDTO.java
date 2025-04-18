@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HobbyDTO {
-    private Integer id;
+    private Long id;
     private String name;
 
     public HobbyDTO(Hobby hobby) {

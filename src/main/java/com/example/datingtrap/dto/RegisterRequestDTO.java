@@ -25,6 +25,6 @@ public class RegisterRequestDTO {
     private String avatarUrl;
     private LocalDate birthDate;
     private PreferenceDTO preference;
-    private List<Long> hobbyIds;
+    private Set<Long> hobbyIds;
 
 }
