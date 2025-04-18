@@ -36,4 +36,6 @@ public class ApiErrorResponse {
         this.status = status;
         this.timestamp = LocalDateTime.now();
     }
+
 }
+
