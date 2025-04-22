@@ -1,8 +1,10 @@
 package com.example.datingtrap.dto;
 
 import lombok.*;
-
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class CreateMatchRequest {
     private Long userIdA;
     private Long userIdB;

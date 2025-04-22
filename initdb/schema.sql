@@ -91,12 +91,11 @@ CREATE TABLE IF NOT EXISTS public.profiles (
 
 -- Bảng swipes
 CREATE TABLE IF NOT EXISTS public.swipes (
-  id int4 NOT NULL,
+  id SERIAL PRIMARY KEY,
   swiper_id int4 NOT NULL,
   swiped_id int4 NOT NULL,
-  status varchar NULL, -- liked / disliked / superliked
+  status varchar NULL,
   created_at timestamp NULL,
-  CONSTRAINT swipes_pkey PRIMARY KEY (id),
   CONSTRAINT swipes_swiped_id_fkey FOREIGN KEY (swiped_id) REFERENCES public.users(id),
   CONSTRAINT swipes_swiper_id_fkey FOREIGN KEY (swiper_id) REFERENCES public.users(id)
 );
