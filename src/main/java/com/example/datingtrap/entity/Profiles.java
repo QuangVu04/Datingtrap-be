@@ -1,12 +1,10 @@
 package com.example.datingtrap.entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 
 @Getter
 @Setter
@@ -16,7 +14,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "profiles")
 public class Profiles {
-
     @Id
     @Column(name = "user_id")
     private long userId;
@@ -26,11 +23,15 @@ public class Profiles {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(name = "full_name")
     private String fullName;
+
     private Integer age;
     private String bio;
     private String gender;
     private String job;
+
+    @Column(name = "\"location\"") // dùng dấu " để đúng với column gốc có dấu "location"
     private String location;
 
     @Column(name = "avatar_url")

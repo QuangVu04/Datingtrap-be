@@ -1,6 +1,6 @@
 package com.example.datingtrap.dto;
 
-import com.example.datingtrap.entity.Profile;
+import com.example.datingtrap.entity.Profiles;
 import com.example.datingtrap.entity.User;
 import com.example.datingtrap.entity.Preference;
 import com.example.datingtrap.entity.Hobby;
@@ -27,7 +27,7 @@ public class ProfileDTO {
     private Set<HobbyDTO> hobbies;
     private PreferenceDTO preference;
 
-    public ProfileDTO (Profile profile) {
+    public ProfileDTO (Profiles profile) {
         this.userId = profile.getUserId();
         this.username = profile.getUser().getUsername();
         this.age = profile.getAge();

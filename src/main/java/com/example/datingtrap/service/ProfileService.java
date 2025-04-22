@@ -24,13 +24,13 @@ public class ProfileService {
     private final UserHobbyRepository userHobbyRepository;
 
     public ProfileDTO getProfileByUserId(Long userId) {
-        Profile profile = profileRepository.findById(userId)
+        Profiles profile = profileRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Profile not found with id: " + userId));
         return new ProfileDTO(profile);
     }
 
     public ProfileDTO updateProfile(Long userId, ProfileUpdateDTO dto) {
-        Profile profile = profileRepository.findById(userId)
+        Profiles profile = profileRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Profile not found with id: " + userId));
         User user = profile.getUser();
 
@@ -99,7 +99,7 @@ public class ProfileService {
         userRepository.save(user);
 
         // Create profile
-        Profile profile = new Profile();
+        Profiles profile = new Profiles();
         profile.setUser(user);
         profile.setUserId(user.getId());
         profile.setFullName(dto.getFullName());

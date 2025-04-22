@@ -32,7 +32,7 @@ public class User {
     private UUID fireBase;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Profile profile;
+    private Profiles profile;
 
 
     @CreationTimestamp
