@@ -6,6 +6,7 @@ import com.example.datingtrap.entity.User;
 import com.example.datingtrap.repository.MatchRepository;
 import com.example.datingtrap.repository.UserRepository;
 import com.example.datingtrap.service.Matchservice.MatchService;
+import com.example.datingtrap.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class MatchServiceImpl implements MatchService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     public ResponseEntity<ApiResponse> createMatch(CreateMatchRequest request){
         User user1 = userRepository.findById(request.getUserIdA()).orElseThrow(() -> new RuntimeException("User A not found with ID: " + request.getUserIdA()));
         User user2 = userRepository.findById(request.getUserIdB()).orElseThrow(() -> new RuntimeException("User B not found with ID: " + request.getUserIdB()));
@@ -31,6 +35,14 @@ public class MatchServiceImpl implements MatchService {
         matches.setUserIdB(user2);
 
         matchRepository.save(matches);
+
+//        // Send match notifications to both users
+//        String user1Name = user1.getProfile() != null ? user1.getProfile().getFullName() : "Someone";
+//        String user2Name = user2.getProfile() != null ? user2.getProfile().getFullName() : "Someone";
+//
+//        // Send notifications
+//        notificationService.createMatchNotification(user1.getId(), matches.getId(), user2Name);
+//        notificationService.createMatchNotification(user2.getId(), matches.getId(), user1Name);
         ApiResponse response = new ApiResponse("Match created successfully", "SUCCESS");
         return ResponseEntity.ok(response);
     }

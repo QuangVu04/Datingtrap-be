@@ -2,11 +2,13 @@ package com.example.datingtrap.service.SwipeService.Impl;
 
 import com.example.datingtrap.dto.*;
 import com.example.datingtrap.entity.*;
+import com.example.datingtrap.enums.NotificationType;
 import com.example.datingtrap.enums.SwipeType;
 import com.example.datingtrap.repository.ProfileRepository;
 import com.example.datingtrap.repository.SwipeRepository;
 import com.example.datingtrap.repository.UserRepository;
 import com.example.datingtrap.service.Matchservice.MatchService;
+import com.example.datingtrap.service.NotificationService;
 import com.example.datingtrap.service.SwipeService.SwipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,6 +37,9 @@ public class SwipeServiceImpl implements SwipeService {
     @Autowired
     private ProfileRepository profileRepository;
 
+    @Autowired
+    private NotificationService notificationService;
+
     public ApiResponse swipe(SwipeDTO dto) {
 
         if (swipeRepository.existsBySwiperIdAndSwipedId(dto.getSwiperId(), dto.getSwipedId())) {
@@ -56,6 +61,10 @@ public class SwipeServiceImpl implements SwipeService {
 
         // Check nếu người kia cũng đã LIKE lại thì tạo MATCH
         if (dto.getType() == SwipeType.LIKE) {
+
+//            // Send a notification to the swiped user that someone liked them
+//            notificationService.createLikeNotification(swiped.getId(), swiper.getId());
+
             Optional<Swipe> other = swipeRepository.findBySwiperIdAndSwipedIdAndType(
                     dto.getSwipedId(), dto.getSwiperId(), SwipeType.LIKE);
 

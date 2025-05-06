@@ -31,6 +31,9 @@ public class User {
     @Column(name = "\"fireBaseId\"")
     private UUID fireBase;
 
+    @Column(name = "fcm_token")
+    private String fcmToken;
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Profiles profile;
 

@@ -10,6 +10,7 @@ import com.example.datingtrap.repository.MatchRepository;
 import com.example.datingtrap.repository.MessageRepository;
 import com.example.datingtrap.repository.UserRepository;
 import com.example.datingtrap.service.MessageService.MessageService;
+import com.example.datingtrap.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -34,6 +35,9 @@ public class MessageServiceImpl implements MessageService {
 
     @Autowired
     private MatchRepository matchRepository;
+
+    @Autowired
+    private NotificationService notificationService;
 
     public ResponseEntity<Paging<MessageDTO>> findChatBetween(Long matchId, int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
@@ -71,6 +75,10 @@ public class MessageServiceImpl implements MessageService {
         message.setCreatedAt(LocalDateTime.now());
 
         messageRepository.save(message);
+
+//        // Send notification to receiver
+//        String senderName = sender.getProfile() != null ? sender.getProfile().getFullName() : "Someone";
+//        notificationService.createMessageNotification(receiver.getId(), match.getId(), senderName);
 
         ApiResponse response = new ApiResponse("Message sent successfully", "SUCCESS");
         return ResponseEntity.ok(response);
