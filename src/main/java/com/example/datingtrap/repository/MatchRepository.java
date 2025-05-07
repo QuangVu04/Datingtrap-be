@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Matches,Long> {
@@ -38,5 +39,6 @@ public interface MatchRepository extends JpaRepository<Matches,Long> {
     @Query(value = "SELECT COUNT(*) FROM matches m WHERE m.user1_id = :userId OR m.user2_id = :userId", nativeQuery = true)
     long countMatchesByUser(@Param("userId") Long userId);
 
+    ListMatchConvo findMatchConvoById(Long matchId);
 
 }

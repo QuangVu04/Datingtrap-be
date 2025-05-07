@@ -1,6 +1,7 @@
 package com.example.datingtrap.service.MessageService.Impl;
 
 import com.example.datingtrap.dto.ApiResponse;
+import com.example.datingtrap.dto.ListMatchConvo;
 import com.example.datingtrap.dto.MessageDTO;
 import com.example.datingtrap.dto.Paging;
 import com.example.datingtrap.entity.Matches;
@@ -83,5 +84,9 @@ public class MessageServiceImpl implements MessageService {
         ApiResponse response = new ApiResponse("Message sent successfully", "SUCCESS");
         return ResponseEntity.ok(response);
     }
+
+    public ListMatchConvo getUpdateConvo(Long matchId) {
+        return matchRepository.findMatchConvoById(matchId);
+    };
 
 }
