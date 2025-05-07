@@ -26,10 +26,10 @@ public class MessageController {
         System.out.println(">>> GET MESSAGES called with matchId=" + matchId);
         return messageService.findChatBetween(matchId, page, size);
     }
-
-    @PostMapping
-    public ResponseEntity<ApiResponse> sendMessage(@RequestBody MessageDTO request) {
-        System.out.println(">>> GET MESSAGES=" + request.getMessage());
-        return messageService.sendMessage(request);
-    }
+//
+//    @PostMapping
+//    public ResponseEntity<ApiResponse> sendMessage(@RequestBody MessageDTO request) {
+//        System.out.println(">>> GET MESSAGES=" + request.getMessage());
+//        return messageService.sendMessage(request);
+//    }
 }
