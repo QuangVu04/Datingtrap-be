@@ -22,7 +22,7 @@ public class MessageSocketController {
     public MessageDTO sendMessage(@Payload MessageDTO messageDTO) {
         // Optionally save the message in DB
         messageService.sendMessage(messageDTO);
-        ListMatchConvo updatedConvo = messageService.getUpdateConvo(messageDTO.getId());
+        ListMatchConvo updatedConvo = messageService.getUpdateConvo(messageDTO.getId(), messageDTO.getSenderId());
 
         messagingTemplate.convertAndSend("/topic/match.update." + messageDTO.getSenderId(), updatedConvo);
         messagingTemplate.convertAndSend("/topic/match.update." + messageDTO.getReceiverId(), updatedConvo);
@@ -30,29 +30,4 @@ public class MessageSocketController {
     }
 
 
-//    @MessageMapping("/chat.sendMessage")
-//    @SendTo("/topic/messages")
-//    public void sendMessage1(MessageDTO message) {
-        // Sau khi lưu tin nhắn vào DB (nên làm trong service trước đó)
-
-        // Gửi thông báo tới người nhận để cập nhật danh sách match
-//        MatchUpdateDTO matchUpdate = new MatchUpdateDTO(
-//                message.getMatchId(),
-//                message.getMessage(),
-//                message.getTimestamp()
-//        );
-
-//        String topic = "/topic/match-update/" + message.getReceiverId();
-//        messagingTemplate.convertAndSend(topic, matchUpdate);
-    }
-
-
-//    @MessageMapping("/chat/send")
-//    public void sendMessage(MessageDTO messageDTO) {
-//        // Lưu vào DB
-//        messageService.sendMessage(messageDTO);
-//
-//        // Gửi realtime tới 2 người (giả sử sử dụng matchId để định danh)
-//        messagingTemplate.convertAndSend("/topic/chat/" + messageDTO.getId(), messageDTO);
-//    }
-
+}

@@ -15,5 +15,5 @@ public interface MessageService {
 
     ResponseEntity<ApiResponse> sendMessage(MessageDTO request);
 
-    ListMatchConvo getUpdateConvo(Long matchId);
+    ListMatchConvo getUpdateConvo(Long matchId, Long userId);
 }

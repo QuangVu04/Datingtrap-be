@@ -39,6 +39,26 @@ public interface MatchRepository extends JpaRepository<Matches,Long> {
     @Query(value = "SELECT COUNT(*) FROM matches m WHERE m.user1_id = :userId OR m.user2_id = :userId", nativeQuery = true)
     long countMatchesByUser(@Param("userId") Long userId);
 
-    ListMatchConvo findMatchConvoById(Long matchId);
+    @Query(
+            value = "SELECT m.id AS matchId, " +
+                    "u.id AS partnerId, u.username AS partnerUsername, " +
+                    "p.avatar_url AS partnerAvatarUrl, " +
+                    "msg.message AS lastMessage, msg.created_at AS lastMessageTime " +
+                    "FROM matches m " +
+                    "LEFT JOIN messages msg ON m.id = msg.match_id AND msg.created_at = (" +
+                    "  SELECT MAX(m2.created_at) FROM messages m2 WHERE m2.match_id = m.id" +
+                    ") " +
+                    "JOIN users u ON (m.user1_id = :userId AND u.id = m.user2_id) " +
+                    "OR (m.user2_id = :userId AND u.id = m.user1_id) " +
+                    "JOIN profiles p ON p.user_id = u.id " +
+                    "WHERE m.id = :matchId " +
+                    "AND (m.user1_id = :userId OR m.user2_id = :userId) ",
+            nativeQuery = true
+    )
+    Optional<ListMatchConvo> findMatchConvoById(
+            @Param("matchId") Long matchId,
+            @Param("userId") Long userId
+    );
+
 
 }

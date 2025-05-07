@@ -85,8 +85,9 @@ public class MessageServiceImpl implements MessageService {
         return ResponseEntity.ok(response);
     }
 
-    public ListMatchConvo getUpdateConvo(Long matchId) {
-        return matchRepository.findMatchConvoById(matchId);
-    };
+    public ListMatchConvo getUpdateConvo(Long matchId, Long userId) {
+        return matchRepository.findMatchConvoById(matchId, userId)
+                .orElseThrow(() -> new RuntimeException("Match not found or user not authorized"));
+    }
 
 }
