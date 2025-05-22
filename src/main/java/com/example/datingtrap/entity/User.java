@@ -29,7 +29,7 @@ public class User {
     private String email;
 
     @Column(name = "\"fireBaseId\"")
-    private UUID fireBase;
+    private String fireBase;
 
     @Column(name = "fcm_token")
     private String fcmToken;

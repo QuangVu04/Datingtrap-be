@@ -13,6 +13,9 @@ target/
 .springBeans
 .sts4-cache
 src/main/resources/fir-ai-89ea0-7f71e8d48b75.json
+**/google-services.json
+**/tinder-clone-9cf64-firebase-adminsdk-fbsvc-d97fc41854.json
+**/tinder-clone-b63c7-firebase-adminsdk-fbsvc-30f69e05d6.json
 ### IntelliJ IDEA ###
 .idea
 *.iws

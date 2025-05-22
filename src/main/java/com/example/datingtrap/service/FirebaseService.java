@@ -25,26 +25,6 @@ import java.util.Optional;
 public class FirebaseService {
     private final UserRepository userRepository;
 
-    @Value("${firebase.configuration-file}")
-    private String firebaseConfigPath;
-
-    @PostConstruct
-    public void initialize() {
-        try {
-            FirebaseOptions options = FirebaseOptions.builder()
-                    .setCredentials(GoogleCredentials.fromStream(
-                            new ClassPathResource(firebaseConfigPath).getInputStream()))
-                    .build();
-
-            if (FirebaseApp.getApps().isEmpty()) {
-                FirebaseApp.initializeApp(options);
-                log.info("Firebase application has been initialized");
-            }
-        } catch (IOException e) {
-            log.error("Error initializing Firebase: {}", e.getMessage());
-        }
-    }
-
     public void sendNotification(NotificationDTO notification, String fcmToken) {
         try {
             if (fcmToken == null) {

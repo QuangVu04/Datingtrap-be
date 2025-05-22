@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.users (
   id SERIAL PRIMARY KEY,
   username varchar NOT NULL,
   email varchar NOT NULL,
-  "fireBaseId" uuid ,
+  "fireBaseId" String ,
   created_at timestamp NULL,
   CONSTRAINT users_email_key UNIQUE (email),
   CONSTRAINT "users_fireBaseId_key" UNIQUE ("fireBaseId"),
