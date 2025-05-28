@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "preferences")
 public class Preference {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @OneToOne

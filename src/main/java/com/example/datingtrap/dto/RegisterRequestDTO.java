@@ -20,6 +20,7 @@ public class RegisterRequestDTO {
     private Integer age;
     private String bio;
     private String gender;
+    private String fireBaseId;
     private String job;
     private String location;
     private String avatarUrl;

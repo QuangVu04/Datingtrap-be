@@ -17,7 +17,7 @@ public class SequenceResetter {
         // Giả sử max id hiện tại bạn lấy được là 42
         Long maxId = jdbcTemplate.queryForObject("SELECT MAX(id) FROM users", Long.class);
         if (maxId == null) {
-            maxId = 0L;
+            maxId = 1L;
         }
         // reset sequence để lần nextval trả về maxId + 1
         jdbcTemplate.execute("SELECT setval('public.users_id_seq', " + maxId + ", true)");

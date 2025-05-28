@@ -5,12 +5,28 @@ import java.util.Objects;
 
 public class UserHobbyId implements Serializable {
     private Long user;
-    private Long hobby;
+    private Integer hobby;
 
     public UserHobbyId() {}
 
-    public UserHobbyId(Long user, Long hobby) {
+    public UserHobbyId(Long user, Integer hobby) {
         this.user = user;
+        this.hobby = hobby;
+    }
+
+    public Long getUser() {
+        return user;
+    }
+
+    public void setUser(Long user) {
+        this.user = user;
+    }
+
+    public Integer getHobby() {
+        return hobby;
+    }
+
+    public void setHobby(Integer hobby) {
         this.hobby = hobby;
     }
 

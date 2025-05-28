@@ -96,12 +96,11 @@ public class ProfileService {
         User user = new User();
         user.setUsername(dto.getUsername());
         user.setEmail(dto.getEmail());
-        userRepository.save(user);
+        user.setFireBase(dto.getFireBaseId());
 
         // Create profile
         Profiles profile = new Profiles();
         profile.setUser(user);
-        profile.setUserId(user.getId());
         profile.setFullName(dto.getFullName());
         profile.setAge(dto.getAge());
         profile.setBio(dto.getBio());
@@ -111,7 +110,7 @@ public class ProfileService {
         profile.setAvatarUrl(dto.getAvatarUrl());
         profile.setBirthDate(dto.getBirthDate());
 
-        profileRepository.save(profile);
+        user.setProfile(profile); // Gán profile cho user
 
         // Save preference
         PreferenceDTO prefDto = dto.getPreference();
@@ -123,7 +122,8 @@ public class ProfileService {
                 .maxDistance(prefDto.getMaxDistance())
                 .datingPurpose(prefDto.getDatingPurpose())
                 .build();
-        preferenceRepository.save(preference);
+
+        user.setPreference(preference); // Gán preference cho user
 
         // Save hobbies
         List<Long> hobbyIds = dto.getHobbyIds();
@@ -132,12 +132,10 @@ public class ProfileService {
                         .orElseThrow(() -> new ResourceNotFoundException("Hobby not found: " + id)))
                 .collect(Collectors.toSet());
 
-        for (Hobby hobby : hobbies) {
-            UserHobby userHobby = new UserHobby();
-            userHobby.setUser(user);
-            userHobby.setHobby(hobby);
-            userHobbyRepository.save(userHobby);
-        }
+        user.setHobbies(hobbies);
+
+        // Save user (cascades profile, preference, hobbies)
+        userRepository.save(user);
 
         return new ProfileDTO(profile);
     }

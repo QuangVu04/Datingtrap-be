@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.users (
   id SERIAL PRIMARY KEY,
   username varchar NOT NULL,
   email varchar NOT NULL,
-  "fireBaseId" String ,
+  fireBaseId varchar ,
   created_at timestamp NULL,
   CONSTRAINT users_email_key UNIQUE (email),
   CONSTRAINT "users_fireBaseId_key" UNIQUE ("fireBaseId"),
@@ -62,14 +62,13 @@ CREATE TABLE IF NOT EXISTS public.notifications (
 
 -- Bảng preferences
 CREATE TABLE IF NOT EXISTS public.preferences (
-  id int4 NOT NULL,
+  id SERIAL PRIMARY KEY,
   user_id int4 NOT NULL,
   interested_gender varchar NULL, -- male/ female/both
   max_distance int4 NULL,
   min_age int4 NULL,
   max_age int4 NULL,
   dating_purpose varchar NULL, -- serious/casual/friend/fwb
-  CONSTRAINT preferences_pkey PRIMARY KEY (id),
   CONSTRAINT preferences_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id)
 );
 
